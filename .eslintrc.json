@@ -1,0 +1,93 @@
+{
+    "root": true,
+    "extends": ["airbnb-typescript", "airbnb",
+      "eslint:recommended",
+      "plugin:import/recommended",
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended",
+      "prettier",
+      "prettier/react",
+      "prettier/@typescript-eslint"],
+    "env": {
+      "browser": true,
+      "jest": true,
+      "node": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint", "react", "react-hooks"],
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "sourceType": "module",
+      "project": "./tsconfig.json",
+      "extraFileExtensions": [".vue", ".md", ".json", ".css"],
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "rules": {
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "react/jsx-filename-extension": [0, { "allow": "always" }],
+      "import/extensions": ["error","never"],
+      "no-use-before-define": ["off",{ "classes": false, "variables": false } ],
+      "linebreak-style": "off",
+      "indent": "off",
+      "quotes": [2, "double", { "avoidEscape": true }],
+      "no-whitespace-before-property": "error",
+      "object-curly-newline": [
+        "error",
+        {
+          "ObjectExpression": { "multiline": true, "minProperties": 3 },
+          "ObjectPattern": { "multiline": true },
+          "ImportDeclaration": "never",
+          "ExportDeclaration": { "multiline": true, "minProperties": 3 }
+        }
+      ],
+      "react/jsx-props-no-spreading": [
+        "off",
+        {
+          "html": "ignore",
+          "custom": "ignore",
+          "explicitSpread": "ignore",
+          "exceptions": []
+        }
+      ],
+      "import/prefer-default-export": "off",
+      "max-len": [
+        "error",
+        {
+          "code": 140,
+          "ignoreUrls": true,
+          "ignoreComments": true
+        }
+      ],
+      "semi": "off",
+      "@typescript-eslint/semi": ["off"],
+      "react/function-component-definition": [2, {
+        "namedComponents": ["function-declaration","function-expression"]
+      }],
+      "func-names": ["error", "as-needed"],
+      "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+      "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
+      "@typescript-eslint/no-explicit-any": "off"
+    },
+    "overrides": [
+      {
+        // enable the rule specifically for TypeScript files
+        "files": ["*.ts"],
+        "rules": {
+          "@typescript-eslint/explicit-module-boundary-types": ["error"]
+        }
+      },
+      {
+        "files": [
+          "**/__tests__/*.{j,t}s?(x)",
+          "**/tests/unit/**/*.spec.{j,t}s?(x)"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
+  }
+  

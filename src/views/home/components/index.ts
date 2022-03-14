@@ -1,0 +1,5 @@
+export { default as Activity } from "./activity"
+export { default as Footer } from "./footer"
+export { default as Navbar } from "./navbar"
+export { default as Employee } from  "./employee"
+export { default as AddEmployee } from "./add-employee"

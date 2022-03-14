@@ -1,0 +1,23 @@
+dist/
+node_modules/
+coverage
+.github
+.editorconfig
+.env
+.env.example
+.env.sample
+.eslintignore
+.gitignore
+/tsconfig.json
+.eslintrc.json
+README.md
+package.json
+manifest.json
+commitlint.config.js
+.prettierrc.*
+src/setupTests.ts
+.lintstagedrc
+tailwind.config.js
+**/
+# Ignore artifacts:
+build
