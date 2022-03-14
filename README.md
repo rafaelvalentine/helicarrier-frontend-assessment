@@ -15,14 +15,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://gitlab.com/rafaelvalentine/captain-cook.git
+git remote add origin https://gitlab.com/diggitalInc/captain-cook-web.git
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](https://gitlab.com/rafaelvalentine/captain-cook/-/settings/integrations)
+- [ ] [Set up project integrations](https://gitlab.com/diggitalInc/captain-cook-web/-/settings/integrations)
 
 ## Collaborate with your team
 
