@@ -58,7 +58,7 @@ function Main({ label, placeholder, onKeyUp, className, required, small, inputRe
   useEffect(() => {   
     if (typeof props?.onSetValue === "string")  helpers.setValue(props?.onSetValue)
     if (typeof props?.onSetValue === "object")  helpers.setValue(props?.onSetValue.value, props?.onSetValue.shouldValidate)
-  }, [props?.onSetValue])
+  }, [props?.onSetValue, helpers])
   return (
     <Form.MainLabelContainer htmlFor={field.name} className={className} margin={props.margin} ref={inputRef}>
       {label ? (

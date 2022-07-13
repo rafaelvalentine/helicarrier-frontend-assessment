@@ -1,4 +1,4 @@
-/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-restricted-syntax, react-hooks/exhaustive-deps */
 import React, { useEffect, useMemo, useState } from "react"
 import { useSelector } from "react-redux"
 import Items from "../items"

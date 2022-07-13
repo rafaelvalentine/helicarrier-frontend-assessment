@@ -38,9 +38,9 @@ class Index extends React.Component<Props, State> {
     )
   }
 }
-const mapStateToProps = (state: any) => ({})
+const mapStateToProps = () => ({})
 
-const mapDispatchToProps = (dispatch: any) => ({  })
+const mapDispatchToProps = () => ({  })
 
 const connector = connect(mapStateToProps, mapDispatchToProps)
 

@@ -1,5 +1,5 @@
 import React from "react"
-import { BsHouseDoor, BsChevronDown } from "react-icons/bs"
+import { BsChevronDown } from "react-icons/bs"
 import { GoThreeBars as Bars } from "react-icons/go"
 import { SiSpacex as SpaceX } from "react-icons/si"
 import SpaceXMain from "../../../../shared/themes/assets/images/spacex_logo.png"

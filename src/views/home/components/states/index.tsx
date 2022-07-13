@@ -25,7 +25,7 @@ function States({ newState }: IProps) {
     if (newState && newState !== state) {
       setState((values) => ({ ...values, state: newState }))
     }
-  }, [newState, isOpen])
+  }, [newState, isOpen, state])
 
   const ref = useRef(null)
 

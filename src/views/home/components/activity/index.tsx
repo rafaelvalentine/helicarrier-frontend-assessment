@@ -7,8 +7,7 @@ import { AiOutlineFileSearch } from "react-icons/ai"
 import { Form, Formik } from "formik"
 import { useDispatch } from "react-redux"
 import { useToggle } from "../../../../shared/hooks"
-import AddEmployeeModal from "../add-employee"
-import { handleSetSearchFilter, handleSetSearchQuery } from "../../../../store"
+import { handleSetSearchQuery } from "../../../../store"
 import Filters from "../filter"
 import { Wrapper, StyledButton, StyledInput } from "./styles"
 
@@ -29,7 +28,7 @@ function Activity() {
             }}
           >
             {({ values, handleReset, handleSubmit }) => (
-              <form className="w-full flex justify-end items-center" onSubmit={handleSubmit}>
+              <Form className="w-full flex justify-end items-center" onSubmit={handleSubmit}>
                 <StyledInput
                   search
                   name="query"
@@ -41,7 +40,6 @@ function Activity() {
                         onClick={() => {
                           handleReset()
                           handleSubmit()
-                          // window.location.reload()
                         }}
                         className="w-6 h-6 cursor-pointer"
                       />
@@ -58,7 +56,7 @@ function Activity() {
                 >
                   <AiOutlineFileSearch className="h-6 w-6 text-blue-700" />
                 </StyledButton>
-              </form>
+              </Form>
             )}
           </Formik>
 

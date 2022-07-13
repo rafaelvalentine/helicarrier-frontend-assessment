@@ -28,7 +28,7 @@ type CheckBoxInputProps = {
 function CheckBoxInput({ children, label, className, inputRef, ...props }: CheckBoxInputProps) {
   const [type, setType] = useState<CheckBoxInputProps["type"]>("checkbox")
 
-  const [field, meta] = useField({
+  const [field] = useField({
     name: props?.name || "",
     // validate: props?.validate,
     type,
@@ -37,7 +37,7 @@ function CheckBoxInput({ children, label, className, inputRef, ...props }: Check
   })
 
   useEffect(() => {
-    if (props?.type && props?.type?.toLowerCase() === "checkout" || props?.type?.toLowerCase() === "radio" ) {
+    if ((props?.type && props?.type?.toLowerCase() === "checkout") || props?.type?.toLowerCase() === "radio") {
       setType(props?.type)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

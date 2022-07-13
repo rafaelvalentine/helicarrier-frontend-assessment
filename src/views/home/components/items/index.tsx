@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any, react/require-default-props, react/no-unused-prop-types, object-curly-newline, camelcase */
-import React, { useEffect } from "react"
+import React from "react"
 import { format, parseISO } from "date-fns"
 import State from "../states"
-import { Wrapper, StyledLogo as Logo } from "./styles"
+import { Wrapper } from "./styles"
 
 interface IProps {
   mission_name?: string | null
