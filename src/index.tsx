@@ -1,22 +1,24 @@
 import React from "react"
 import ReactDOM from "react-dom"
-
-import "./index.css"
-
 import { Provider } from "react-redux"
 import App from "./App"
+import ApolloClient from "./services/graphql"
 import ThemeProvider from "./shared/themes/style/stylc"
 import reportWebVitals from "./reportWebVitals"
 import store from "./store"
+
+import "./index.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
-    </Provider>
+    <ApolloClient>
+      <Provider store={store}>
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
+      </Provider>
+    </ApolloClient>
   </React.StrictMode>,
   document.getElementById("root")
 )

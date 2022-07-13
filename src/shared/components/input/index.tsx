@@ -13,6 +13,10 @@ type MainProps = {
   label?: string
   placeholder?: string
   onKeyUp?: (event: React.SyntheticEvent) => void
+  onSetValue?: string | {
+    value: string;
+    shouldValidate?: boolean
+  }
   small?: string
   inputRef?:
     | ((((instance: HTMLLabelElement | null) => void) | React.RefObject<HTMLLabelElement> | null) &
@@ -30,13 +34,14 @@ type MainProps = {
   search?: boolean | undefined
   preend?: React.ReactNode | boolean | undefined
   append?: React.ReactNode | boolean | undefined
+  disabled?: boolean
 }
 
-function Main({ label, placeholder, onKeyUp, className, required, small, inputRef, id, search, preend, append, ...props }: MainProps) {
+function Main({ label, placeholder, onKeyUp, className, required, small, inputRef, search, preend, append, disabled, ...props }: MainProps) {
   const [type, setType] = useState<StyledProps["type"]>("text")
 
-  const [field, meta] = useField({
-    name: props?.name || "",
+  const [field, meta, helpers] = useField({
+    name: props?.name || props?.id || "",
     validate: props?.validate,
     type,
     multiple: props?.multiple,
@@ -47,41 +52,39 @@ function Main({ label, placeholder, onKeyUp, className, required, small, inputRe
     if (props?.type && props?.type.toLowerCase() === "password") {
       setType("password")
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {   
+    if (typeof props?.onSetValue === "string")  helpers.setValue(props?.onSetValue)
+    if (typeof props?.onSetValue === "object")  helpers.setValue(props?.onSetValue.value, props?.onSetValue.shouldValidate)
+  }, [props?.onSetValue])
   return (
-    <Form.MainLabelContainer className={className} margin={props.margin} ref={inputRef}>
+    <Form.MainLabelContainer htmlFor={field.name} className={className} margin={props.margin} ref={inputRef}>
       {label ? (
-        <Form.MainLabel>
-          <Form.BoldLabel className="input-label">
+        <Form.MainLabel className="input-label">
+          <Form.BoldLabel>
             {" "}
-            {label} <bdi>{required ? "*" : ""}</bdi>{" "}
+            {label} <span className="asterisk">{required ? "*" : ""}</span>{" "}
           </Form.BoldLabel>{" "}
           <br />
         </Form.MainLabel>
       ) : null}
       <Form.MainInputContainer
-        className="w-full flex justify-start items-center"
+        className="w-full flex justify-start items-center input-container"
         errorMessage={meta?.error}
         isValid={!meta?.error}
         isEmpty={!meta?.value}
       >
-        {search && !preend && (
-          <Search
-            className="mx-2 h-4 w-4"
-          />
-        )}
-        <Form.MainInput placeholder={placeholder} onKeyUp={onKeyUp} {...props} {...field} type={type} />
+        {search && !preend && <Search className="mx-2 h-4 w-4 search" />}
+        {!search && preend}
+        <Form.MainInput placeholder={placeholder} onKeyUp={onKeyUp} {...props} {...field} type={type} disabled={disabled} />
+        {append}
         {props?.type && props?.type.toLowerCase() === "password" && type === "password" && !append && (
-          <Visibility
-            className="mx-2 cursor-pointer h-4 w-4"
-            onClick={() => setType("text")}
-          />
+          <Visibility className="mx-2 cursor-pointer h-4 w-4 icon visibility" onClick={() => setType("text")} />
         )}
         {props?.type && props?.type.toLowerCase() === "password" && type !== "password" && !append && (
-          <VisibilityClose
-            className="mx-2 cursor-pointer h-4 w-4"
-            onClick={() => setType("password")}
-          />
+          <VisibilityClose className="mx-2 cursor-pointer h-4 w-4 icon invisibility" onClick={() => setType("password")} />
         )}
       </Form.MainInputContainer>
 
@@ -99,6 +102,7 @@ Main.defaultProps = {
   label: "",
   placeholder: "",
   onKeyUp: () => {},
+  onSetValue: ()=>{},
   small: "",
   inputRef: {},
   validate: () => {},
@@ -113,6 +117,7 @@ Main.defaultProps = {
   preend: false,
   append: false,
   name: "",
+  disabled: false,
 }
 
 export default Main

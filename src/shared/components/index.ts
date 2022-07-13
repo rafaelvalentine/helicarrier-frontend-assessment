@@ -1,4 +1,6 @@
-export * from "./input"
+export { default as Input } from "./input"
+export { default as Checkbox } from "./checkbox"
+export { default as Select } from "./select"
 export { default as Button } from "./button"
 export * from "./picture"
 export { default as Modal } from "./modal"

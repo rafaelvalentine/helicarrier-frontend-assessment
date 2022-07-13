@@ -1,4 +1,3 @@
-/* eslint max-len: ["off"] */
 import React, { ChangeEvent } from "react"
 import * as Form from "../../themes/style/stylc/shared/components"
 
@@ -27,27 +26,51 @@ type SelectProps = {
   defaultValue?: string
 }
 
-function Select({ children, label, name, onChange, value, required, small, errorMessage, isEmpty, className, selectRef, defaultValue, ...props }: SelectProps) {
-  return <Form.MainLabelContainer className={className} ref={selectRef}>
-    {label ? (
-      <Form.MainLabel>
-        <Form.BoldLabel className="input-label">
-          {" "}
-          {label} <bdi>{required ? "*" : ""}</bdi>{" "}
-        </Form.BoldLabel>{" "}
-        <br />
-      </Form.MainLabel>
-    ) : null}
-    <Form.Select name={name} onChange={onChange} value={value} isEmpty={isEmpty} errorMessage={errorMessage} defaultValue={defaultValue} {...props}>
-      {children}
-    </Form.Select>
-    <Form.SmallLabel className="input-small">{small}</Form.SmallLabel>
-    {errorMessage ? (
-      <Form.ErrorMessage data-testid={`${name}-error`} isEmpty={isEmpty} isValid className="input-error">
-        {errorMessage}
-      </Form.ErrorMessage>
-    ) : null}
-  </Form.MainLabelContainer>
+function Select({
+  children,
+  label,
+  name,
+  onChange,
+  value,
+  required,
+  small,
+  errorMessage,
+  isEmpty,
+  className,
+  selectRef,
+  defaultValue,
+  ...props
+}: SelectProps) {
+  return (
+    <Form.MainLabelContainer className={className} ref={selectRef}>
+      {label ? (
+        <Form.MainLabel className="input-label">
+          <Form.BoldLabel>
+            {" "}
+            {label} <span className="asterisk">{required ? "*" : ""}</span>{" "}
+          </Form.BoldLabel>{" "}
+          <br />
+        </Form.MainLabel>
+      ) : null}
+      <Form.Select 
+      name={name} 
+      onChange={onChange} 
+      value={value} 
+      isEmpty={isEmpty} 
+      errorMessage={errorMessage} 
+      defaultValue={defaultValue}
+      required={required}
+      {...props}>
+        {children}
+      </Form.Select>
+      <Form.SmallLabel className="input-small">{small}</Form.SmallLabel>
+      {errorMessage ? (
+        <Form.ErrorMessage data-testid={`${name}-error`} isEmpty={isEmpty} isValid={!errorMessage} className="input-error">
+          {errorMessage}
+        </Form.ErrorMessage>
+      ) : null}
+    </Form.MainLabelContainer>
+  )
 }
 
 Select.defaultProps = {
@@ -68,8 +91,8 @@ Select.defaultProps = {
   errorMessage: "",
   isEmpty: false,
   selectRef: {},
-  name:"",
-  defaultValue:""
+  name: "",
+  defaultValue: "",
 }
 
 export default Select

@@ -1,27 +1,22 @@
+/* eslint-disable react/no-unused-prop-types, react/require-default-props */ 
 import React, { useEffect, useState, useRef } from "react"
-import {useDispatch } from "react-redux"
 import { useToggle, useOnClickOutside } from "../../../../shared/hooks"
-import {handleSetEmployeeState} from "../../../../store"
 import { Wrapper } from "./styles"
 
 interface IProps {
   newState?: string
   handleNewState?: (state: string) => void
-  employeeId: string | number | undefined 
+  employeeId?: string | number | undefined 
   //   isOpen?: boolean
   //   setIsOpen?: (open?: boolean) => void
 }
-function States({ newState, handleNewState, employeeId }: IProps) {
-    const dispatch = useDispatch()
-  const [{ state, states, color }, setState] = useState<{ state: string; states: string[]; color: { [key: string]: string } }>({
-    states: ["added", "in-check", "approved", "active", "inactive"],
-    state: "inactive",
+function States({ newState }: IProps) {
+  const [{ state, color }, setState] = useState<{ state: string; states: string[]; color: { [key: string]: string } }>({
+    states: ["success", "failed"],
+    state: "success",
     color: {
-      added: "bg-yellow-700",
-      "in-check": "bg-orange-700",
-      approved: "bg-green-700",
-      active: "bg-blue-700",
-      inactive: "bg-red-700",
+      success: "bg-green-700",
+      failed: "bg-red-700",
     },
   })
   const [isOpen, setIsOpen] = useToggle()
@@ -30,7 +25,7 @@ function States({ newState, handleNewState, employeeId }: IProps) {
     if (newState && newState !== state) {
       setState((values) => ({ ...values, state: newState }))
     }
-  }, [newState, handleNewState, isOpen])
+  }, [newState, isOpen])
 
   const ref = useRef(null)
 
@@ -60,7 +55,7 @@ function States({ newState, handleNewState, employeeId }: IProps) {
           {state}
         </div>
       </Wrapper>
-      {isOpen && (
+      {/* {isOpen && (
         <div className="absolute text-black z-10 w-44 border border-solid border-gray-200 top-[60px]">
           {states.map((item) => (
             <div
@@ -77,7 +72,7 @@ function States({ newState, handleNewState, employeeId }: IProps) {
             </div>
           ))}
         </div>
-      )}
+      )} */}
     </div>
   )
 }

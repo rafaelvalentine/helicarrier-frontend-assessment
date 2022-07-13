@@ -1,26 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react"
 import { Helmet } from "react-helmet"
-import { connect, ConnectedProps } from "react-redux";
-import { Activity, Employee, Footer, Navbar } from "../../components"
-import { EmployeeState, handleGetEmployee } from "../../../../store"
+import { connect, ConnectedProps } from "react-redux"
+import { Activity, Footer, Navbar, ListItems, RowHead } from "../../components"
 
-type Props = ConnectedProps<typeof connector>;
+
+type Props = ConnectedProps<typeof connector>
 type State = Record<string, unknown>
 class Index extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
-    this.state = { }
+    this.state = {}
   }
 
-  componentDidMount() {
-    // eslint-disable-next-line
-    const { handleGetEmployee } = this.props
-    handleGetEmployee()
-  }
+  componentDidMount() {}
 
   render() {
-    const { employees } = this.props
     return (
       <>
         {/*  this component handles setting the title and dynamically injecting head specific tags */}
@@ -28,15 +23,13 @@ class Index extends React.Component<Props, State> {
           <meta charSet="utf-8" />
           <title>Home Page</title>
         </Helmet>
-        <div id="_home" className="h-screen">
+        <div id="_home" className="h-screen overflow-x-hidden">
           <Navbar />
-          <div className="h-[84%] w-[85%] mx-auto">
+          <div className="h-[85%] w-full px-2 md:px-0 md:w-[85%] mx-auto overflow-y-auto">
             <Activity />
-            <div className="my-4 w-full h-4/5 max-h-4/5 overflow-hidden">
-              {employees.length > 0 && employees.map(employee=>{
-                return <Employee key={employee.employeeId} {...employee}/>
-              })}
-              
+            <RowHead />
+            <div className="my-4 px-1 w-full h-4/5 max-h-4/5 overflow-y-auto">
+                <ListItems/>
             </div>
           </div>
           <Footer />
@@ -45,15 +38,10 @@ class Index extends React.Component<Props, State> {
     )
   }
 }
-const mapStateToProps = (state: {employees: {employees: EmployeeState[]}}) => ({
-	// currentUser: selectCurrentUser(state),
-  employees: state.employees.employees
-});
+const mapStateToProps = (state: any) => ({})
 
-const mapDispatchToProps = (dispatch: any) => ({handleGetEmployee: ()=> dispatch(handleGetEmployee())});
+const mapDispatchToProps = (dispatch: any) => ({  })
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-
+const connector = connect(mapStateToProps, mapDispatchToProps)
 
 export default connector(Index)
